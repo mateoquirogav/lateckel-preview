@@ -352,6 +352,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .bnf-i{padding:14px 12px;grid-template-columns:24px 1fr;gap:2px 10px;border-radius:14px}.bnf-i svg{width:22px;height:22px}
   .bnf-i b{font-size:12px}.bnf-i span{font-size:9.5px;letter-spacing:.04em}
 }
+.vt{background:var(--g9);color:#fff}
+.vt .kick{color:var(--g2)}.vt .h2{color:#fff}.vt .sub{color:#E2D6C6}
+.vt li{color:#E2D6C6}.vt li i{background:#fff;color:var(--g9)}
+.vt .btn{background:#fff;color:var(--g9)}
+.vt .vid{box-shadow:0 30px 70px -20px rgba(0,0,0,.65)}
+.bnf{padding:18px 0 0}
+@container (max-width:760px){.bnf{padding:12px 0 0}}
 </style>
 </head>
 <body>
@@ -370,14 +377,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
  <div class="screen" id="screen">
  <div class="site">
 
-  <!-- 1 · Barra de anuncios -->
-  <div class="ann"><div class="ann-t">
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>10% OFF con transferencia bancaria</div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/></svg>3 cuotas sin interés</div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Envío gratis en compras +$160.000</div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>10% OFF con transferencia bancaria</div>
-  </div></div>
-
   <!-- 2 · Encabezado -->
   <header class="hdr"><div class="wrap">
     <svg class="burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -390,13 +389,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     </div>
   </div></header>
 
-  <!-- 3 · Beneficios (como Destino Clothes), debajo del encabezado -->
-  <section class="bnf" aria-label="Beneficios"><div class="wrap bnf-g">
-    <div class="bnf-i"><svg viewBox="0 0 32 32"><rect x="4" y="9" width="24" height="15" rx="2"/><path d="M4 14h24M20 20h4"/></svg><b>10% OFF</b><span>Pagando con transferencia</span></div>
-    <div class="bnf-i"><svg viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="18" rx="3"/><path d="M4 12h24M9 19h6"/></svg><b>3 cuotas</b><span>Sin interés</span></div>
-    <div class="bnf-i"><svg viewBox="0 0 32 32"><path d="M3 10h15v11H3zM18 14h6l4 4v3H18"/><circle cx="9" cy="23" r="2.4"/><circle cx="23" cy="23" r="2.4"/></svg><b>Envío gratis</b><span>En compras +$160.000</span></div>
-    <div class="bnf-i"><svg viewBox="0 0 32 32"><path d="M16 28s-9-7.6-9-15a9 9 0 0 1 18 0c0 7.4-9 15-9 15z"/><circle cx="16" cy="13" r="3.2"/></svg><b>Showroom</b><span>Av. Boedo 966, CABA</span></div>
-  </div></section>
+  <!-- 2b · Barra de anuncios (debajo del encabezado) -->
+  <div class="ann"><div class="ann-t">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>10% OFF con transferencia bancaria</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/></svg>3 cuotas sin interés</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Envío gratis en compras +$160.000</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>10% OFF con transferencia bancaria</div>
+  </div></div>
 
   <!-- 4 · Banner con foto (sin video) -->
   <section class="hero img" id="top">
@@ -410,8 +409,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   </section>
 
 
+  <!-- 3 · Beneficios (como Destino Clothes), debajo del banner -->
+  <section class="bnf" aria-label="Beneficios"><div class="wrap bnf-g">
+    <div class="bnf-i"><svg viewBox="0 0 32 32"><rect x="4" y="9" width="24" height="15" rx="2"/><path d="M4 14h24M20 20h4"/></svg><b>10% OFF</b><span>Pagando con transferencia</span></div>
+    <div class="bnf-i"><svg viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="18" rx="3"/><path d="M4 12h24M9 19h6"/></svg><b>3 cuotas</b><span>Sin interés</span></div>
+    <div class="bnf-i"><svg viewBox="0 0 32 32"><path d="M3 10h15v11H3zM18 14h6l4 4v3H18"/><circle cx="9" cy="23" r="2.4"/><circle cx="23" cy="23" r="2.4"/></svg><b>Envío gratis</b><span>En compras +$160.000</span></div>
+    <div class="bnf-i"><svg viewBox="0 0 32 32"><path d="M16 28s-9-7.6-9-15a9 9 0 0 1 18 0c0 7.4-9 15-9 15z"/><circle cx="16" cy="13" r="3.2"/></svg><b>Showroom</b><span>Av. Boedo 966, CABA</span></div>
+  </div></section>
+
   <!-- 5 · Video + texto (2 secciones, como su imagen + texto actual) -->
-  <section class="sec vt" id="vt"><div class="wrap">
+  <section class="sec vt" id="vt" style="margin-top:18px"><div class="wrap">
     <div class="vt-r">
       <div class="rv">
         <div class="kick">Arnés Body</div>
@@ -449,7 +456,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   </div></section>
 
   <!-- 6 · Productos destacados -->
-  <section class="sec" id="prods" style="padding-top:20px"><div class="wrap">
+  <section class="sec" id="prods"><div class="wrap">
     <div class="head rv"><div><div class="kick">Destacados</div><div class="h2">Los más <em>vendidos</em></div></div><a class="link" href="#prods">Ver todos</a></div>
     <div class="grid" id="g1"></div>
     <div class="nota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Tus precios reales, sin «,00» ni centavos: precio, transferencia y cuotas salen de tu Tiendanube.</div>

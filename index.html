@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* colores de La Teckel: marrón #301405 (textos y newsletter) + mostaza #C4B84C (barra y pie) */
-:root{--ink:#1F0D03;--g9:#301405;--g7:#5A3520;--g5:#8E7A3A;--g2:#C4B84C;--g1:#F4F0E2;--cr:#F7F3E8;--mu:#6B5F55;--ln:#E9E1D3;--w:#fff;--rojo:#D9473A;
+/* La Teckel: todo marrón #301405 con texto blanco; sin mostaza (pedido de Mateo 19-11) */
+:root{--ink:#1F0D03;--g9:#301405;--g7:#5A3520;--g5:#8A6A52;--g2:#EADBC8;--g1:#F4F0E2;--cr:#F7F3E8;--mu:#6B5F55;--ln:#E9E1D3;--w:#fff;--rojo:#D9473A;
  --verde-f:#EFF8F2;--verde-b:#BFE3CB;--verde-t:#1F6B43;--celeste-f:#EFF5FB;--celeste-b:#C4DAEE;--celeste-t:#244E73}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -43,7 +43,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
 .kick{font:600 11px Inter;letter-spacing:.2em;text-transform:uppercase;color:var(--g5);margin-bottom:10px}
 .h2{font:800 36px/1.08 'Plus Jakarta Sans';letter-spacing:-.025em;color:var(--g9)}
-.h2 em{font-style:normal;background:var(--g2);color:var(--g9);padding:0 .18em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.h2 em{font-style:normal;color:inherit}
 .sub{font-size:16px;line-height:1.6;color:var(--mu);margin-top:12px;max-width:520px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:50px;padding:0 26px;border-radius:4px;font:700 13px 'Plus Jakarta Sans';letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;background:var(--g9);color:#fff;border:0}
 .btn.w{background:#fff;color:var(--g9)}.btn.o{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
@@ -52,10 +52,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px;gap:20px}
 .link{font:600 13px Inter;color:var(--g9);text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
 /* anuncio */
-.ann{background:var(--g2);color:var(--g9)!important;color:#fff;height:38px;overflow:hidden;position:relative}
+.ann{background:var(--g9);color:#fff!important;color:#fff;height:38px;overflow:hidden;position:relative}
 .ann-t{display:flex;flex-direction:column;animation:ann 12s infinite}
-.ann-t div{height:38px;display:flex;align-items:center;justify-content:center;gap:10px;font:600 12px 'Plus Jakarta Sans';color:var(--g9);letter-spacing:.06em}
-.ann-t svg{width:15px;height:15px;color:var(--g9)}
+.ann-t div{height:38px;display:flex;align-items:center;justify-content:center;gap:10px;font:600 12px 'Plus Jakarta Sans';color:#fff;letter-spacing:.06em}
+.ann-t svg{width:15px;height:15px;color:#fff}
 @keyframes ann{0%,28%{transform:translateY(0)}33%,61%{transform:translateY(-38px)}66%,94%{transform:translateY(-76px)}100%{transform:translateY(-114px)}}
 /* encabezado */
 .hdr{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
@@ -97,12 +97,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .bb-tx b{font:800 22px/1.15 'Plus Jakarta Sans';letter-spacing:-.01em;text-transform:uppercase}
 .bb-tx span{font:500 15px/1.35 Inter;opacity:.88;margin-top:3px}
 /* categorías */
-.cats{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px)/4);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}.cats::-webkit-scrollbar{display:none}.cat{scroll-snap-align:start}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .cat{position:relative;aspect-ratio:3/4;border-radius:6px;overflow:hidden;background:var(--g9);text-decoration:none;color:#fff;display:block}
 .cat video,.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cat:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(31,13,3,.8))}
 .cat div{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px}
-.cat i{display:block;width:28px;height:3px;background:var(--g2);margin-bottom:10px}
+.cat i{display:block;width:28px;height:3px;background:#fff;margin-bottom:10px}
 .cat b{font:800 19px 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:-.01em}
 .cat span{display:block;font-size:13px;opacity:.85;margin-top:4px}
 .mas{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
@@ -112,17 +112,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .card{background:#fff;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 0 var(--ln),0 10px 30px -22px rgba(48,20,5,.35);cursor:pointer;border:1px solid #F1EAE3}
 .card .ph{position:relative;aspect-ratio:1/1.1;background:var(--cr);overflow:hidden}
 .card .ph img{width:100%;height:100%;object-fit:cover}
-.tag{position:absolute;top:12px;left:12px;background:var(--rojo);color:#fff;font:700 10.5px Inter;letter-spacing:.06em;padding:6px 9px;border-radius:999px}
+.tag{position:absolute;top:12px;left:12px;background:var(--g9);color:#fff;font:700 10.5px Inter;letter-spacing:.06em;padding:6px 9px;border-radius:999px}
 .tag.c{background:#fff;color:var(--g9)}
 .card .in{padding:18px 18px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
 .card h3{font:500 15.5px/1.35 Inter;color:#3D342D;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:42px}
 .op{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mu);margin:2px 0 6px}
 .op .st{display:flex;gap:1px;color:#D9A21B}.op .st svg{width:13px;height:13px}
 .pr{font:700 21px 'Plus Jakarta Sans';color:var(--ink);letter-spacing:-.01em}
-.trf{font-size:13.5px;line-height:1.4;color:var(--verde-t);font-weight:500}
+.trf{font-size:13.5px;line-height:1.4;color:var(--g7);font-weight:500}
 .trf b{font-weight:700}
-.trf em{font-style:normal;font:700 11px Inter;color:#fff;background:var(--rojo);border-radius:999px;padding:2px 7px;margin-left:4px;vertical-align:1px}
-.cuo{font-size:13.5px;color:var(--verde-t);margin-top:2px}
+.trf em{font-style:normal;font:700 11px Inter;color:#fff;background:var(--g9);border-radius:999px;padding:2px 7px;margin-left:4px;vertical-align:1px}
+.cuo{font-size:13.5px;color:var(--g7);margin-top:2px}
 .nota{margin-top:26px;font-size:12px;color:var(--mu);display:flex;gap:8px;align-items:center}
 .nota svg{width:15px;height:15px;color:var(--g5)}
 /* problema solución */
@@ -157,7 +157,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .t-cta p{font-size:14px;color:var(--mu)}
 /* por qué elegirnos */
 .why{background:var(--g9);color:#fff}
-.why .kick{color:var(--g2)}.why .h2{color:#fff}.why .h2 em{background:var(--g2);color:var(--g9)}
+.why .kick{color:var(--g2)}.why .h2{color:#fff}.why .h2 em{color:#fff}
 .why .sub{color:#E2D6C6}
 .why-g{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center}
 .why-l{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
@@ -183,7 +183,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .fq[open] summary svg{transform:rotate(45deg)}
 .fq p{padding:0 40px 22px 0;font-size:15px;line-height:1.65;color:var(--mu)}
 /* cta */
-.cta-b{position:relative;border-radius:10px;overflow:hidden;background:var(--g7);color:#fff;padding:70px 60px;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center}
+.cta-b{position:relative;border-radius:10px;overflow:hidden;background:var(--g9);color:#fff;padding:70px 60px;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center}
 .cta-b .h2{font-size:38px;color:#fff}
 .cta-b .kick{color:var(--g2)}
 .cta-b .sub{color:#EFE5D6}
@@ -291,7 +291,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .hero .cta{margin-top:22px}.hero .cta .btn{flex:1;padding:0 12px}
   .chips{display:none}
   .bb{padding:18px 0}.bb-i{gap:12px;padding:0 28px}.bb-ic{width:42px;height:42px}.bb-ic svg{width:24px;height:24px}.bb-tx b{font-size:17px}.bb-tx span{font-size:13px}
-  .cats{grid-auto-columns:42%;gap:10px}
+  .cats{grid-template-columns:1fr 1fr;gap:10px}
   .cat b{font-size:15px}.cat div{padding:14px}
   .mas a{font-size:11px;padding:8px 12px}
   .grid{grid-template-columns:1fr 1fr;gap:12px}
@@ -327,7 +327,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .vt li{display:flex;gap:12px;font-size:15px;line-height:1.5;color:var(--mu)}
 .vt li i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--g2);color:var(--g9);display:grid;place-items:center;margin-top:1px}
 .vt li i svg{width:12px;height:12px}
-.ps .h2 em{background:var(--g9);color:#fff}
 .map-p iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:sepia(.25) saturate(.9)}
 .est i{background:#2563EB}
 @container (max-width:760px){
@@ -336,11 +335,28 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .vt .h2{font-size:21px}.vt .sub{font-size:13.5px;margin-top:8px}.vt ul{display:none}.vt .btn{height:42px;padding:0 16px;font-size:11px;margin-top:16px}
   .vt .vid{max-width:none;border-radius:10px}.vt .snd{right:6px;bottom:6px;padding:6px;font-size:0;gap:0}.vt .ig{display:none}
 }
+.hero.img{background:var(--g9) url(m/banner.jpg) center/cover no-repeat}
+.hero.img:after{background:linear-gradient(90deg,rgba(48,20,5,.92) 0%,rgba(48,20,5,.72) 34%,rgba(48,20,5,.12) 62%,rgba(48,20,5,0) 80%)}
+.hero .kick,.hero h1 em{color:var(--g2)}
+/* beneficios como Destino Clothes: 4 tarjetas fijas debajo del encabezado */
+.bnf{padding:18px 0}
+.bnf-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.bnf-i{background:var(--g9);color:#fff;border-radius:18px;padding:22px 20px;display:grid;grid-template-columns:34px 1fr;gap:4px 14px;align-items:center}
+.bnf-i svg{grid-row:span 2;width:30px;height:30px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.bnf-i b{font:700 15px 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:.02em}
+.bnf-i span{font:500 11.5px 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:.08em;color:#E2D6C6}
+@container (max-width:760px){
+  .hero.img{background-image:url(m/banner-cel.jpg);background-position:center top}
+  .hero.img:after{background:linear-gradient(180deg,rgba(48,20,5,.05) 25%,rgba(48,20,5,.92) 78%)}
+  .bnf{padding:12px 0}.bnf-g{grid-template-columns:1fr 1fr;gap:8px}
+  .bnf-i{padding:14px 12px;grid-template-columns:24px 1fr;gap:2px 10px;border-radius:14px}.bnf-i svg{width:22px;height:22px}
+  .bnf-i b{font-size:12px}.bnf-i span{font-size:9.5px;letter-spacing:.04em}
+}
 </style>
 </head>
 <body>
 <div class="tool">
-  <b>PRAXIS<span>La Teckel · vista previa de tu web</span></b>
+  <b>PRAXIS<span>La Teckel · vista previa de tu web · v2</span></b>
   <div class="est"><i></i>Estructura 2</div>
   <div class="seg">
     <button data-m="pc" class="on"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>PC</button>
@@ -374,25 +390,25 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     </div>
   </div></header>
 
-  <!-- 3 · Banner con video -->
-  <section class="hero" id="top">
-    <div class="bgv"><img class="poster" src="m/hero.jpg" alt=""><video class="av" src="m/hero.mp4" poster="m/hero.jpg" muted loop playsinline preload="metadata"></video></div>
-    <div class="hcols">
-      <div><video class="av" src="m/h3.mp4" poster="m/h3.jpg" muted loop playsinline preload="metadata"></video></div>
-      <div><video class="av" src="m/hero.mp4" poster="m/hero.jpg" muted loop playsinline preload="metadata"></video></div>
-      <div><video class="av" src="m/h2.mp4" poster="m/h2.jpg" muted loop playsinline preload="metadata"></video></div>
-    </div>
+  <!-- 3 · Beneficios (como Destino Clothes), debajo del encabezado -->
+  <section class="bnf" aria-label="Beneficios"><div class="wrap bnf-g">
+    <div class="bnf-i"><svg viewBox="0 0 32 32"><rect x="4" y="9" width="24" height="15" rx="2"/><path d="M4 14h24M20 20h4"/></svg><b>10% OFF</b><span>Pagando con transferencia</span></div>
+    <div class="bnf-i"><svg viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="18" rx="3"/><path d="M4 12h24M9 19h6"/></svg><b>3 cuotas</b><span>Sin interés</span></div>
+    <div class="bnf-i"><svg viewBox="0 0 32 32"><path d="M3 10h15v11H3zM18 14h6l4 4v3H18"/><circle cx="9" cy="23" r="2.4"/><circle cx="23" cy="23" r="2.4"/></svg><b>Envío gratis</b><span>En compras +$160.000</span></div>
+    <div class="bnf-i"><svg viewBox="0 0 32 32"><path d="M16 28s-9-7.6-9-15a9 9 0 0 1 18 0c0 7.4-9 15-9 15z"/><circle cx="16" cy="13" r="3.2"/></svg><b>Showroom</b><span>Av. Boedo 966, CABA</span></div>
+  </div></section>
+
+  <!-- 4 · Banner con foto (sin video) -->
+  <section class="hero img" id="top">
     <div class="wrap">
       <div class="kick rv">La Teckel · Paws &amp; People</div>
       <h1 class="rv" style="--i:1">Salí a pasear <em>con estilo</em>. Los dos.</h1>
       <p class="rv" style="--i:2">Arneses, correas y collares de diseño para tu perro, y el set que combina para vos. A prueba de agua, fáciles de lavar y anti-tirones.</p>
       <div class="cta rv" style="--i:3"><a class="btn w" href="#prods">Ver los más vendidos</a><a class="btn o" href="#vt">Ver arneses</a></div>
-      <div class="chips rv" style="--i:4"><span>Showroom en Boedo</span><span>10% OFF transfiriendo</span><span>3 cuotas sin interés</span></div>
+      
     </div>
   </section>
 
-  <!-- 4 · Beneficios: banda que corre sola -->
-  <section class="bb" aria-label="Beneficios"><div class="bb-p" id="bb"></div></section>
 
   <!-- 5 · Video + texto (2 secciones, como su imagen + texto actual) -->
   <section class="sec vt" id="vt"><div class="wrap">
@@ -439,17 +455,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     <div class="nota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Tus precios reales, sin «,00» ni centavos: precio, transferencia y cuotas salen de tu Tiendanube.</div>
   </div></section>
 
-  <!-- 7 · Problema → solución -->
-  <section class="sec ps" id="ps"><div class="wrap ps-g">
-    <div class="rv">
-      <div class="h2">¿Un regalo que le quede <em>lindo de verdad</em>?</div>
-      <p class="sub">Elegís el set, nosotros lo preparamos con nuestro packaging y te llega listo para regalar (o regalarte).</p>
-      <a class="btn" href="#prods" style="margin-top:26px">Armar mi set</a>
-    </div>
-    <div class="vid rv" style="--i:2">
-      <div class="ig"><img src="m/logo-dark.png" alt="">lateckel.oficial</div>
-      <video class="av snd-v" src="m/ps.mp4" poster="m/ps.jpg" muted loop playsinline preload="none"></video>
-      <button class="snd" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/></svg><span>Activar sonido</span></button>
+  <!-- 7 · Por qué elegirnos (en lugar de «¿Un regalo…?») -->
+  <section class="sec why" id="why"><div class="wrap">
+    <div class="rv" style="text-align:center"><div class="kick">Por qué elegirnos</div><div class="h2">Pensado para el paseo de todos los días.</div></div>
+    <div class="why-l">
+      <div class="wi rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .6-4.5 4 1.3 6L12 16.3 6.6 19.2l1.3-6-4.5-4 6-.6z"/></svg><b>Diseño propio</b><p>Sets que combinan para tu perro y para vos.</p></div>
+      <div class="wi rv" style="--i:1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><b>Hechos para durar</b><p>A prueba de agua y fáciles de lavar.</p></div>
+      <div class="wi rv" style="--i:2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 17 3l4 4L7 21H3z"/><path d="m13 7 4 4M9 11l2 2M6 14l2 2"/></svg><b>El talle justo</b><p>Guía de talles y ayuda por WhatsApp.</p></div>
+      <div class="wi rv" style="--i:3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><b>Showroom en Boedo</b><p>Vení a probarlo antes de llevarlo.</p></div>
     </div>
   </div></section>
 
@@ -557,12 +570,7 @@ const T=[['Sofía','Arnés Body Vichy','Por fin un arnés que Lola se deja poner
 let TT=[...T];
 const tc=(t,n)=>`<div class="tc${n?' nuevo':''}"><div class="st">${star.repeat(t[3]||5)}</div><p>«${t[2]}»</p><div class="who"><i>${t[0][0]}</i><div>${t[0]}<small>Compró ${t[1]||'en La Teckel'}</small></div></div></div>`;
 const pintarT=n=>{const h=TT.map((t,i)=>tc(t,n&&i===0)).join('');$('#mt').innerHTML=h+h};pintarT();
-// beneficios (banda mostaza con círculos marrones)
-const k='stroke="#C4B84C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"';
-const BI={t:`<svg viewBox="0 0 44 44" fill="none" ${k}><rect x="4" y="12" width="36" height="21" rx="2"/><circle cx="22" cy="22.5" r="4.5"/><path d="M10 17.5v.01M34 27.5v.01"/></svg>`,c:`<svg viewBox="0 0 44 44" fill="none" ${k}><rect x="4" y="12" width="36" height="21" rx="2"/><path d="M4 19h36M10 27h7"/></svg>`,e:`<svg viewBox="0 0 44 44" fill="none" ${k}><rect x="3" y="13" width="23" height="16" rx="1"/><path d="M26 18h7l5 5.5V29H26z"/><circle cx="13" cy="32" r="3"/><circle cx="31" cy="32" r="3"/></svg>`,s:`<svg viewBox="0 0 44 44" fill="none" ${k}><path d="M6 18 9 8h26l3 10"/><path d="M6 18v18h32V18"/><path d="M6 18c0 3 2.5 5 5.3 5s5.3-2 5.3-5c0 3 2.4 5 5.4 5s5.4-2 5.4-5c0 3 2.4 5 5.3 5S38 21 38 18"/><path d="M18 36v-8h8v8"/></svg>`};
-const BB=[['t','10% OFF en transferencia','En todos los productos'],['c','3 cuotas sin interés','Con tarjeta de crédito'],['e','Envío gratis','En compras +$160.000'],['s','Showroom en Boedo','Av. Boedo 966, CABA']];
-const bbSet='<div style="display:flex">'+BB.map(x=>`<div class="bb-i"><span class="bb-ic">${BI[x[0]]}</span><span class="bb-tx"><b>${x[1]}</b><span>${x[2]}</span></span></div>`).join('')+'</div>';
-$('#bb').innerHTML=bbSet+bbSet+bbSet+bbSet;
+
 // FAQ
 const F=[['¿Cómo elijo el talle?','Tenés una guía de talles con las medidas de cuello y pecho. Si dudás, mandanos las medidas por WhatsApp y te decimos cuál le va.'],['¿Hacen envíos?','Sí, a todo el país. En compras de más de $160.000 el envío es gratis.'],['¿Cómo funciona el 10% OFF?','Elegís transferencia bancaria al finalizar la compra y el descuento se aplica solo.'],['¿Puedo pagar en cuotas?','Sí, en 3 cuotas sin interés con tarjeta de crédito.'],['¿Puedo verlo en persona?','Claro. Nuestro showroom está en Av. Boedo 966 (Joyería Bilevich), de lunes a viernes de 10 a 19 h y sábados de 10 a 13 h.'],['¿Puedo cambiarlo si no le queda?','Sí, según nuestra política de cambio. Escribinos y lo resolvemos.']];
 $('#fq').innerHTML=F.map((f,i)=>`<details class="fq"${i?'':' open'}><summary>${f[0]}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></summary><p>${f[1]}</p></details>`).join('');

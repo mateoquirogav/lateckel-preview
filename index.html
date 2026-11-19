@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Teckel · Estructura 2 · PRAXIS</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* colores de La Teckel: marrón #301405 (textos y newsletter) + mostaza #C4B84C (barra y pie) */
+:root{--ink:#1F0D03;--g9:#301405;--g7:#5A3520;--g5:#8E7A3A;--g2:#C4B84C;--g1:#F4F0E2;--cr:#F7F3E8;--mu:#6B5F55;--ln:#E9E1D3;--w:#fff;--rojo:#D9473A;
+ --verde-f:#EFF8F2;--verde-b:#BFE3CB;--verde-t:#1F6B43;--celeste-f:#EFF5FB;--celeste-b:#C4DAEE;--celeste-t:#244E73}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Plus Jakarta Sans',Inter,system-ui,sans-serif;color:var(--ink);background:#E7E2D6;-webkit-font-smoothing:antialiased;touch-action:manipulation}
+svg{display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+/* ---------- barra PRAXIS ---------- */
+.tool{position:fixed;inset:0 0 auto 0;height:58px;z-index:90;background:#0F1B2E;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px;gap:14px}
+.tool b{font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:.18em;font-size:14px}
+.tool b span{font-weight:500;letter-spacing:.04em;opacity:.65;margin-left:12px;font-size:13px}
+.seg{display:flex;background:rgba(255,255,255,.08);border-radius:999px;padding:4px}
+.seg button{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:999px;font:500 13px Inter;color:#C9D3E3}
+.seg button.on{background:#fff;color:#0F1B2E}
+.est{font:600 12px Inter;display:flex;align-items:center;gap:8px;color:#C9D3E3}
+.est i{width:10px;height:10px;border-radius:50%;background:#F07A1A}
+.stage{position:fixed;inset:58px 0 0 0;display:flex;justify-content:center;align-items:flex-start;padding:22px;overflow:hidden}
+.device{width:100%;max-width:1360px;height:100%;background:#fff;border-radius:12px;box-shadow:0 30px 80px -30px rgba(0,0,0,.35);overflow:hidden;display:flex;flex-direction:column;position:relative;transition:max-width .5s cubic-bezier(.2,.8,.2,1),border-radius .5s}
+.chrome{height:38px;flex:none;background:#F1F1EE;display:flex;align-items:center;gap:7px;padding:0 14px;border-bottom:1px solid #E2E2DD}
+.chrome i{width:11px;height:11px;border-radius:50%;background:#D9D9D4}
+.chrome .url{margin-left:14px;flex:1;max-width:420px;height:24px;border-radius:7px;background:#fff;display:flex;align-items:center;gap:6px;padding:0 10px;font-size:12px;color:#777}
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
+.device.mob{max-width:390px;border-radius:44px;border:10px solid #111;height:min(100%,844px)}
+.device.mob .chrome{display:none}
+@media (max-width:760px){
+  .tool{height:52px;padding:0 12px}.tool b span,.est{display:none}
+  .stage{inset:52px 0 0 0;padding:0}.device,.device.mob{max-width:none;border-radius:0;border:0;height:100%}
+  .chrome,.seg{display:none}
+}
+/* ---------- sitio ---------- */
+.site{container-type:inline-size;background:#fff}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+.kick{font:600 11px Inter;letter-spacing:.2em;text-transform:uppercase;color:var(--g5);margin-bottom:10px}
+.h2{font:800 36px/1.08 'Plus Jakarta Sans';letter-spacing:-.025em;color:var(--g9)}
+.h2 em{font-style:normal;background:var(--g2);color:var(--g9);padding:0 .18em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.sub{font-size:16px;line-height:1.6;color:var(--mu);margin-top:12px;max-width:520px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:50px;padding:0 26px;border-radius:4px;font:700 13px 'Plus Jakarta Sans';letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;background:var(--g9);color:#fff;border:0}
+.btn.w{background:#fff;color:var(--g9)}.btn.o{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+.btn.l{background:transparent;color:var(--g9);box-shadow:inset 0 0 0 1.5px var(--g9)}
+.sec{padding:84px 0}
+.head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px;gap:20px}
+.link{font:600 13px Inter;color:var(--g9);text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+/* anuncio */
+.ann{background:var(--g2);color:var(--g9)!important;color:#fff;height:38px;overflow:hidden;position:relative}
+.ann-t{display:flex;flex-direction:column;animation:ann 12s infinite}
+.ann-t div{height:38px;display:flex;align-items:center;justify-content:center;gap:10px;font:600 12px 'Plus Jakarta Sans';color:var(--g9);letter-spacing:.06em}
+.ann-t svg{width:15px;height:15px;color:var(--g9)}
+@keyframes ann{0%,28%{transform:translateY(0)}33%,61%{transform:translateY(-38px)}66%,94%{transform:translateY(-76px)}100%{transform:translateY(-114px)}}
+/* encabezado */
+.hdr{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.hdr .wrap{height:76px;display:flex;align-items:center;gap:30px}
+.logo{display:block;text-decoration:none}
+.logo img{height:46px;width:auto;display:block}
+.nav{display:flex;gap:28px;margin-left:auto;font:600 13px Inter}
+.nav a{color:var(--ink);text-decoration:none}
+.ico{display:flex;gap:16px;margin-left:24px;color:var(--g9)}
+.ico svg{width:22px;height:22px}
+.cart{position:relative}.cart b{position:absolute;top:-6px;right:-8px;background:var(--g9);color:#fff;font:600 10px Inter;width:17px;height:17px;border-radius:50%;display:grid;place-items:center}
+.burger{display:none;width:24px;height:24px;color:var(--g9)}
+/* banner */
+.hero{position:relative;height:640px;overflow:hidden;background:var(--g9);color:#fff}
+.bgv{display:none;position:absolute;inset:0}
+.bgv video,.bgv .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hcols{position:absolute;top:0;bottom:0;right:0;width:60%;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--g9)}
+.hcols div{position:relative;overflow:hidden}
+.hcols div:nth-child(2){transform:translateY(-34px)}.hcols div:nth-child(2) video{height:calc(100% + 68px)}
+.hcols video{width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--g9) 0%,var(--g9) 40%,rgba(48,20,5,.55) 52%,rgba(48,20,5,0) 70%)}
+.hero .wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center}
+.hero .kick{color:var(--g2)}
+.hero h1{font:800 58px/1.02 'Plus Jakarta Sans';letter-spacing:-.03em;max-width:620px}
+.hero h1 em{font-style:normal;color:var(--g2)}
+.hero p{font-size:18px;line-height:1.6;max-width:480px;margin-top:20px;color:#F4EEE4}
+.hero .cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.chips{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap}
+.chips span{font:600 11px Inter;letter-spacing:.12em;text-transform:uppercase;padding:8px 13px;border:1px solid rgba(255,255,255,.35);border-radius:999px}
+/* beneficios: banda roja que corre sola (la misma de Aurel) */
+.bb{background:var(--g2);color:var(--g9);overflow:hidden;padding:26px 0}
+.bb-p{display:flex;width:max-content;animation:bbm 30s linear infinite}
+@keyframes bbm{to{transform:translateX(-50%)}}
+.bb-i{display:flex;align-items:center;gap:16px;padding:0 44px;position:relative;flex:none}
+.bb-i:after{content:"";position:absolute;right:0;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--g9);opacity:.35}
+.bb-ic{width:52px;height:52px;flex:none;border-radius:50%;background:var(--g9);display:grid;place-items:center}
+.bb-ic svg{width:30px;height:30px}
+.bb-tx{display:flex;flex-direction:column;white-space:nowrap}
+.bb-tx b{font:800 22px/1.15 'Plus Jakarta Sans';letter-spacing:-.01em;text-transform:uppercase}
+.bb-tx span{font:500 15px/1.35 Inter;opacity:.88;margin-top:3px}
+/* categorías */
+.cats{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px)/4);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}.cats::-webkit-scrollbar{display:none}.cat{scroll-snap-align:start}
+.cat{position:relative;aspect-ratio:3/4;border-radius:6px;overflow:hidden;background:var(--g9);text-decoration:none;color:#fff;display:block}
+.cat video,.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cat:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(31,13,3,.8))}
+.cat div{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px}
+.cat i{display:block;width:28px;height:3px;background:var(--g2);margin-bottom:10px}
+.cat b{font:800 19px 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:-.01em}
+.cat span{display:block;font-size:13px;opacity:.85;margin-top:4px}
+.mas{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.mas a{font:600 12px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--g9);text-decoration:none;border:1px solid var(--ln);background:var(--cr);padding:9px 14px;border-radius:999px}
+/* tarjetas con embudo (las que quedaron) */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:#fff;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 0 var(--ln),0 10px 30px -22px rgba(48,20,5,.35);cursor:pointer;border:1px solid #F1EAE3}
+.card .ph{position:relative;aspect-ratio:1/1.1;background:var(--cr);overflow:hidden}
+.card .ph img{width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;top:12px;left:12px;background:var(--rojo);color:#fff;font:700 10.5px Inter;letter-spacing:.06em;padding:6px 9px;border-radius:999px}
+.tag.c{background:#fff;color:var(--g9)}
+.card .in{padding:18px 18px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card h3{font:500 15.5px/1.35 Inter;color:#3D342D;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:42px}
+.op{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mu);margin:2px 0 6px}
+.op .st{display:flex;gap:1px;color:#D9A21B}.op .st svg{width:13px;height:13px}
+.pr{font:700 21px 'Plus Jakarta Sans';color:var(--ink);letter-spacing:-.01em}
+.trf{font-size:13.5px;line-height:1.4;color:var(--verde-t);font-weight:500}
+.trf b{font-weight:700}
+.trf em{font-style:normal;font:700 11px Inter;color:#fff;background:var(--rojo);border-radius:999px;padding:2px 7px;margin-left:4px;vertical-align:1px}
+.cuo{font-size:13.5px;color:var(--verde-t);margin-top:2px}
+.nota{margin-top:26px;font-size:12px;color:var(--mu);display:flex;gap:8px;align-items:center}
+.nota svg{width:15px;height:15px;color:var(--g5)}
+/* problema solución */
+.ps{background:var(--cr)}
+.ps-g{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center}
+.ps-l{list-style:none;margin:28px 0 32px;display:grid;gap:16px}
+.ps-l li{display:flex;gap:14px;font-size:15px;line-height:1.5}
+.ps-l i{flex:none;width:26px;height:26px;border-radius:50%;background:var(--g9);color:#fff;display:grid;place-items:center}
+.ps-l i svg{width:14px;height:14px}
+.ps-l b{font-weight:600}
+.ps-l span{color:var(--mu)}
+.pq{font:700 13px 'Plus Jakarta Sans';text-transform:uppercase;letter-spacing:.06em;color:#A0453A;display:flex;gap:10px;align-items:center;margin-bottom:14px}
+.pq:before{content:"";width:22px;height:2px;background:#A0453A}
+.vid{position:relative;width:100%;max-width:360px;justify-self:center;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 30px 60px -25px rgba(48,20,5,.55)}
+.vid video{width:100%;height:100%;object-fit:cover}
+.snd{position:absolute;right:12px;bottom:12px;z-index:2;display:flex;align-items:center;gap:7px;background:rgba(0,0,0,.6);color:#fff;border:0;border-radius:999px;padding:8px 13px;font:600 12px Inter;cursor:pointer;backdrop-filter:blur(6px)}
+.snd svg{width:16px;height:16px}
+.ig{position:absolute;left:12px;top:12px;z-index:2;display:flex;align-items:center;gap:8px;color:#fff;font:600 12px Inter;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.ig img{width:28px;height:28px;border-radius:50%;border:2px solid #fff;background:#fff;object-fit:contain;padding:2px}
+/* testimonios */
+.marq{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mt{display:flex;gap:18px;width:max-content;animation:mq 40s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+.tc{width:340px;flex:none;border:1px solid var(--ln);border-radius:8px;padding:24px;background:#fff}
+.st{display:flex;gap:2px;color:#C8961E}.st svg{width:16px;height:16px}
+.tc p{margin-top:14px;font-size:14px;line-height:1.6;color:var(--mu)}
+.tc .who{display:flex;gap:10px;align-items:center;margin-top:18px;font:600 13px Inter}
+.tc .who i{width:34px;height:34px;border-radius:50%;background:var(--g2);display:grid;place-items:center;font:700 14px 'Plus Jakarta Sans';color:var(--g9);font-style:normal;flex:none}
+.tc small{display:block;font:400 11px Inter;color:var(--mu)}
+.tc.nuevo{border-color:var(--g7);box-shadow:0 0 0 3px rgba(90,53,32,.15)}
+.t-cta{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap}
+.t-cta p{font-size:14px;color:var(--mu)}
+/* por qué elegirnos */
+.why{background:var(--g9);color:#fff}
+.why .kick{color:var(--g2)}.why .h2{color:#fff}.why .h2 em{background:var(--g2);color:var(--g9)}
+.why .sub{color:#E2D6C6}
+.why-g{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:center}
+.why-l{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.wi{border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:28px 22px;text-align:center}
+.wi svg{margin:0 auto}
+.wi svg{width:28px;height:28px;color:var(--g2)}
+.wi b{display:block;font:700 15px 'Plus Jakarta Sans';text-transform:uppercase;margin-top:14px;letter-spacing:.01em}
+.wi p{font-size:13.5px;line-height:1.55;color:#E2D6C6;margin-top:6px}
+.why .vid{box-shadow:0 30px 70px -20px rgba(0,0,0,.6)}
+/* Noam en movimiento (estilo Dámelo / Cry): avanza solo y cambia de lado con el scroll */
+.mov{background:var(--cr);padding:70px 0 76px;overflow:hidden}
+.mov .head{margin-bottom:28px}
+.mov-t{display:flex;gap:12px;width:max-content;will-change:transform}
+.reel{flex:none;width:230px;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:var(--g9);position:relative}
+.reel video{width:100%;height:100%;object-fit:cover}
+.reel:after{content:"";position:absolute;inset:auto 0 0;height:30%;background:linear-gradient(0deg,rgba(0,0,0,.4),transparent)}
+/* faq */
+.faq-g{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px}
+.fq{border-bottom:1px solid var(--ln)}
+.fq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:22px 0;font:600 16px Inter;color:var(--g9)}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary svg{width:20px;height:20px;flex:none;transition:transform .3s}
+.fq[open] summary svg{transform:rotate(45deg)}
+.fq p{padding:0 40px 22px 0;font-size:15px;line-height:1.65;color:var(--mu)}
+/* cta */
+.cta-b{position:relative;border-radius:10px;overflow:hidden;background:var(--g7);color:#fff;padding:70px 60px;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center}
+.cta-b .h2{font-size:38px;color:#fff}
+.cta-b .kick{color:var(--g2)}
+.cta-b .sub{color:#EFE5D6}
+.cta-b .btns{display:flex;flex-direction:column;gap:12px}
+.cta-b .mark{position:absolute;right:-30px;top:-20px;width:300px;opacity:.1}
+/* envíos */
+.map{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ln);border-radius:10px;overflow:hidden}
+.map-i{padding:50px}
+.mr{display:flex;gap:14px;margin-top:20px;font-size:15px;line-height:1.5}
+.mr svg{width:22px;height:22px;color:var(--g7);flex:none;margin-top:2px}
+.mr b{display:block;font-weight:600}
+.mr span{color:var(--mu)}
+.map-i .btn{margin-top:30px}
+.map-p{position:relative;min-height:380px}
+.map-p img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* pie */
+.foot{background:var(--g9);color:#E2D6C6;margin-top:84px;padding:64px 0 28px}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.foot .flogo{height:46px;width:auto}
+.foot p{font-size:14px;line-height:1.65;margin-top:18px;max-width:300px}
+.foot h4{font:700 12px 'Plus Jakarta Sans';letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.foot ul{list-style:none;display:grid;gap:10px;font-size:14px}
+.pay{display:flex;gap:8px;flex-wrap:wrap}
+.pay span{border:1px solid rgba(255,255,255,.18);border-radius:4px;padding:6px 10px;font:600 11px Inter;color:#F4EEE4}
+.fb{border-top:1px solid rgba(255,255,255,.12);margin-top:50px;padding-top:22px;display:flex;justify-content:space-between;font-size:12px;color:#BFAF92}
+.wa{position:sticky;bottom:18px;margin:-70px 18px 18px auto;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 25px -8px rgba(0,0,0,.4);z-index:6}
+.wa svg{width:28px;height:28px;color:#fff}
+/* ---------- ficha (embudo en recuadros pastel, detalles rojos) ---------- */
+.fx{position:absolute;inset:0;z-index:70;background:#fff;overflow-y:auto;display:none;container-type:inline-size}
+.fx.on{display:block}
+.fx-top{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid var(--ln);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:62px}
+.fx-top img{height:34px}
+.fx-top button{display:flex;align-items:center;gap:8px;font:600 13px Inter;color:var(--g9)}
+.fx-top button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.fx-g{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;max-width:1180px;margin:0 auto;padding:36px 40px 80px}
+.fx-gal{display:grid;grid-template-columns:76px 1fr;gap:12px;align-self:start;position:sticky;top:90px}
+.fx-th{display:grid;gap:10px;align-content:start}
+.fx-th img{width:76px;aspect-ratio:2/3;object-fit:cover;border-radius:8px;opacity:.6;cursor:pointer;border:1.5px solid transparent}
+.fx-th img.on{opacity:1;border-color:var(--g9)}
+.fx-main{border-radius:12px;overflow:hidden;background:var(--cr);aspect-ratio:2/2.6}
+.fx-main img{width:100%;height:100%;object-fit:cover}
+.miga{font-size:12px;color:var(--mu)}
+.fx h1{font:700 28px/1.15 'Plus Jakarta Sans';color:var(--g9);margin:10px 0 8px;letter-spacing:-.02em}
+.vend{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mu)}
+.vend .st svg{width:14px;height:14px}
+.fx-pr{margin-top:18px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.fx-pr b{font:500 36px 'Plus Jakarta Sans';color:var(--ink);letter-spacing:-.02em}
+.fx-pr em{font:600 15px Inter;color:var(--rojo);font-style:normal}
+.fx-imp{font-size:12px;color:#9C8E82;margin-top:4px}
+.box{border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:14px;margin-top:12px;border:1.5px solid}
+.box .ic{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex:none;background:#fff}
+.box .ic svg{width:22px;height:22px;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.box small{display:block;font:500 11.5px Inter;letter-spacing:.06em;text-transform:uppercase;color:#6B5E54}
+.box small i{font-style:normal;color:var(--rojo);font-weight:700}
+.box b{display:block;font:700 23px 'Plus Jakarta Sans';letter-spacing:-.01em;margin-top:1px}
+.box.t2{background:var(--verde-f);border-color:var(--verde-b)}.box.t2 .ic svg{stroke:var(--verde-t)}.box.t2 b{color:var(--verde-t)}
+.box.c2{background:var(--celeste-f);border-color:var(--celeste-b);flex-wrap:wrap}.box.c2 .ic svg{stroke:var(--celeste-t)}.box.c2 b{color:var(--celeste-t)}
+.tarj{width:100%;border-top:1px solid var(--celeste-b);padding-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.tarj span{font:700 9.5px Inter;letter-spacing:.04em;color:#5C7088;background:#fff;border:1px solid var(--celeste-b);border-radius:4px;padding:3px 7px}
+.ahorro{font-size:14px;margin-top:12px}.ahorro i{font-style:normal;color:var(--rojo);font-weight:600}
+.envio{display:flex;gap:12px;align-items:center;margin-top:18px;padding:14px 0;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln)}
+.envio svg{width:30px;height:30px;stroke:var(--rojo);fill:none;stroke-width:1.6;flex:none}
+.envio b{display:block;font:600 13px Inter;letter-spacing:.04em;text-transform:uppercase;color:var(--rojo)}
+.envio span{font-size:12.5px;color:var(--mu)}
+.stock{display:flex;align-items:center;gap:8px;font:600 13.5px Inter;color:var(--rojo);margin-top:18px}
+.stock:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rojo);box-shadow:0 0 0 4px rgba(217,71,58,.18)}
+.buy{display:grid;grid-template-columns:120px 1fr;gap:12px;margin-top:16px}
+.qty{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--ln);border-radius:4px;padding:0 16px;height:54px;font-weight:600}
+.buy .btn{height:54px}
+/* modal testimonio */
+.md{position:absolute;inset:0;z-index:80;background:rgba(31,13,3,.5);display:none;align-items:center;justify-content:center;padding:18px}
+.md.on{display:flex}
+.md-b{background:#fff;border-radius:16px;width:100%;max-width:440px;padding:28px;position:relative;max-height:100%;overflow:auto}
+.md-b h4{font:800 20px 'Plus Jakarta Sans';color:var(--g9);text-transform:uppercase}
+.md-b>form>p,.md-b .gr p{font-size:14px;color:var(--mu);margin:6px 0 18px;line-height:1.5}
+.md-x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--cr);display:grid;place-items:center}
+.md-x svg{width:16px;height:16px;stroke:var(--g9);fill:none;stroke-width:2}
+.fld{display:block;margin-bottom:14px}
+.fld span{display:block;font:600 12px Inter;color:var(--g9);margin-bottom:6px}
+.fld input,.fld textarea{width:100%;border:1px solid var(--ln);border-radius:8px;padding:12px 14px;font:400 16px Inter;color:var(--ink);background:#FCFAF8}
+.fld textarea{min-height:96px;resize:vertical}
+.si{display:flex;gap:6px}.si button{color:#D9A21B}.si svg{width:28px;height:28px}.si button.off{color:#E3D9CC}
+.md .btn{width:100%}
+.gr{display:none;text-align:center}
+/* aparición */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*90ms)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none}.mt,.ann-t{animation:none}}
+/* ---------- celular (por ancho del sitio) ---------- */
+@container (max-width:760px){
+  .wrap{padding:0 18px}
+  .sec{padding:56px 0}
+  .h2{font-size:25px}
+  .sub{font-size:15px}
+  .hdr .wrap{height:64px;gap:12px}
+  .burger{display:block}
+  .logo{margin:0 auto}.logo img{height:38px}
+  .nav{display:none}.ico{margin-left:0;gap:12px}.ico .opt{display:none}
+  .hero{height:600px}
+  .hcols{display:none}.bgv{display:block}
+  .hero:after{background:linear-gradient(180deg,rgba(31,13,3,.1) 20%,rgba(31,13,3,.9) 75%)}
+  .hero .wrap{justify-content:flex-end;padding-bottom:40px}
+  .hero h1{font-size:32px}
+  .hero p{font-size:15px;margin-top:14px}
+  .hero .cta{margin-top:22px}.hero .cta .btn{flex:1;padding:0 12px}
+  .chips{display:none}
+  .bb{padding:18px 0}.bb-i{gap:12px;padding:0 28px}.bb-ic{width:42px;height:42px}.bb-ic svg{width:24px;height:24px}.bb-tx b{font-size:17px}.bb-tx span{font-size:13px}
+  .cats{grid-auto-columns:42%;gap:10px}
+  .cat b{font-size:15px}.cat div{padding:14px}
+  .mas a{font-size:11px;padding:8px 12px}
+  .grid{grid-template-columns:1fr 1fr;gap:12px}
+  .card{border-radius:16px}.card .in{padding:12px 12px 14px}
+  .card h3{font-size:13.5px;min-height:36px}
+  .pr{font-size:17px}.trf{font-size:12.5px}.trf em{font-size:10px;padding:1px 6px}.cuo{font-size:12px}.op{font-size:11px}
+  .head .link{display:none}
+  .faq-g{grid-template-columns:1fr;gap:36px}
+  .ps-g{grid-template-columns:1fr 132px;gap:16px}.ps .h2{font-size:21px}.ps .sub{font-size:13.5px;margin-top:10px}.ps .btn{height:42px;padding:0 16px;font-size:11px}.ps .vid{max-width:none;border-radius:10px}.ps .snd{right:6px;bottom:6px;padding:6px;font-size:0;gap:0}.ps .ig{display:none}
+  .vid{max-width:300px}
+  .why-l{grid-template-columns:1fr 1fr;gap:10px;margin-top:28px}.wi{padding:20px 12px}.wi b{font-size:13px}.wi p{font-size:12.5px}
+  .reel{width:150px}
+  .tc{width:280px}
+  .cta-b{grid-template-columns:1fr;padding:40px 24px}.cta-b .h2{font-size:26px}
+  .map{grid-template-columns:1fr}.map-i{padding:28px 22px}.map-p{min-height:230px;order:-1}
+  .fg{grid-template-columns:1fr 1fr;gap:32px}.fg>div:first-child{grid-column:1/-1}
+  .fb{flex-direction:column;gap:6px}
+  .fx-top{padding:0 16px}
+  .fx-g{grid-template-columns:1fr;gap:22px;padding:16px 16px 60px}
+  .fx-gal{position:static;grid-template-columns:1fr}
+  .fx-th{grid-auto-flow:column;grid-auto-columns:60px;order:2}.fx-th img{width:60px}
+  .fx h1{font-size:22px}.fx-pr b{font-size:30px}.box b{font-size:20px}
+}
+
+/* video + texto (lo que hoy es imagen + texto en su web), alternado a lo ancho */
+.vt{background:#fff}
+.vt-r{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center;max-width:1040px;margin:0 auto}
+.vt-r+.vt-r{margin-top:90px}
+.vt-r.inv .vid{order:-1}
+.vt .vid{max-width:340px}
+.vt .kick{color:var(--g5)}
+.vt ul{list-style:none;margin:22px 0 28px;display:grid;gap:12px}
+.vt li{display:flex;gap:12px;font-size:15px;line-height:1.5;color:var(--mu)}
+.vt li i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--g2);color:var(--g9);display:grid;place-items:center;margin-top:1px}
+.vt li i svg{width:12px;height:12px}
+.ps .h2 em{background:var(--g9);color:#fff}
+.map-p iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:sepia(.25) saturate(.9)}
+.est i{background:#2563EB}
+@container (max-width:760px){
+  .vt-r{grid-template-columns:1fr 132px;gap:16px}.vt-r.inv{grid-template-columns:132px 1fr}
+  .vt-r+.vt-r{margin-top:44px}
+  .vt .h2{font-size:21px}.vt .sub{font-size:13.5px;margin-top:8px}.vt ul{display:none}.vt .btn{height:42px;padding:0 16px;font-size:11px;margin-top:16px}
+  .vt .vid{max-width:none;border-radius:10px}.vt .snd{right:6px;bottom:6px;padding:6px;font-size:0;gap:0}.vt .ig{display:none}
+}
+</style>
+</head>
+<body>
+<div class="tool">
+  <b>PRAXIS<span>La Teckel · vista previa de tu web</span></b>
+  <div class="est"><i></i>Estructura 2</div>
+  <div class="seg">
+    <button data-m="pc" class="on"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>PC</button>
+    <button data-m="mob"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>Celular</button>
+  </div>
+</div>
+
+<div class="stage">
+<div class="device" id="device">
+ <div class="chrome"><i></i><i></i><i></i><div class="url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>lateckel.com.ar</div></div>
+ <div class="screen" id="screen">
+ <div class="site">
+
+  <!-- 1 · Barra de anuncios -->
+  <div class="ann"><div class="ann-t">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>10% OFF con transferencia bancaria</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/></svg>3 cuotas sin interés</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Envío gratis en compras +$160.000</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>10% OFF con transferencia bancaria</div>
+  </div></div>
+
+  <!-- 2 · Encabezado -->
+  <header class="hdr"><div class="wrap">
+    <svg class="burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <a class="logo" href="#top"><img src="m/logo-dark.png" alt="La Teckel"></a>
+    <nav class="nav"><a href="#cats">Arneses</a><a href="#cats">Correas</a><a href="#cats">Collares</a><a href="#cats">Chapitas</a><a href="#cats">Sweaters</a><a href="#ofertas">Para vos</a></nav>
+    <div class="ico">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <svg class="opt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+      <span class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><b>2</b></span>
+    </div>
+  </div></header>
+
+  <!-- 3 · Banner con video -->
+  <section class="hero" id="top">
+    <div class="bgv"><img class="poster" src="m/hero.jpg" alt=""><video class="av" src="m/hero.mp4" poster="m/hero.jpg" muted loop playsinline preload="metadata"></video></div>
+    <div class="hcols">
+      <div><video class="av" src="m/h3.mp4" poster="m/h3.jpg" muted loop playsinline preload="metadata"></video></div>
+      <div><video class="av" src="m/hero.mp4" poster="m/hero.jpg" muted loop playsinline preload="metadata"></video></div>
+      <div><video class="av" src="m/h2.mp4" poster="m/h2.jpg" muted loop playsinline preload="metadata"></video></div>
+    </div>
+    <div class="wrap">
+      <div class="kick rv">La Teckel · Paws &amp; People</div>
+      <h1 class="rv" style="--i:1">Salí a pasear <em>con estilo</em>. Los dos.</h1>
+      <p class="rv" style="--i:2">Arneses, correas y collares de diseño para tu perro, y el set que combina para vos. A prueba de agua, fáciles de lavar y anti-tirones.</p>
+      <div class="cta rv" style="--i:3"><a class="btn w" href="#prods">Ver los más vendidos</a><a class="btn o" href="#vt">Ver arneses</a></div>
+      <div class="chips rv" style="--i:4"><span>Showroom en Boedo</span><span>10% OFF transfiriendo</span><span>3 cuotas sin interés</span></div>
+    </div>
+  </section>
+
+  <!-- 4 · Beneficios: banda que corre sola -->
+  <section class="bb" aria-label="Beneficios"><div class="bb-p" id="bb"></div></section>
+
+  <!-- 5 · Video + texto (2 secciones, como su imagen + texto actual) -->
+  <section class="sec vt" id="vt"><div class="wrap">
+    <div class="vt-r">
+      <div class="rv">
+        <div class="kick">Arnés Body</div>
+        <div class="h2">Se pone por las patas, <em>sin pasar por la cabeza</em>.</div>
+        <p class="sub">Fácil de poner y súper cómodo. Ideal para perros que no se dejan poner el arnés.</p>
+        <ul>
+          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></i>Regulable en cuello y pecho</li>
+          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></i>Con guía de talles para elegir sin dudas</li>
+        </ul>
+        <a class="btn" href="#prods">Ver modelo</a>
+      </div>
+      <div class="vid rv" style="--i:2">
+        <div class="ig"><img src="m/logo-dark.png" alt="">lateckel.oficial</div>
+        <video class="av snd-v" src="m/vt1.mp4" poster="m/vt1.jpg" muted loop playsinline preload="none"></video>
+        <button class="snd" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/></svg><span>Activar sonido</span></button>
+      </div>
+    </div>
+    <div class="vt-r inv">
+      <div class="rv" style="--i:1">
+        <div class="kick">Arnés Waterproof</div>
+        <div class="h2">Fresco, liviano y <em>a prueba de agua</em>.</div>
+        <p class="sub">Súper fácil de lavar y perfecto para todos los días: charcos, plaza y lluvia incluidos.</p>
+        <ul>
+          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></i>Se limpia con un trapo húmedo</li>
+          <li><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></i>Combina con correa y portabolsas</li>
+        </ul>
+        <a class="btn" href="#prods">Ver modelo</a>
+      </div>
+      <div class="vid rv">
+        <div class="ig"><img src="m/logo-dark.png" alt="">lateckel.oficial</div>
+        <video class="av snd-v" src="m/vt2.mp4" poster="m/vt2.jpg" muted loop playsinline preload="none"></video>
+        <button class="snd" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/></svg><span>Activar sonido</span></button>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- 6 · Productos destacados -->
+  <section class="sec" id="prods" style="padding-top:20px"><div class="wrap">
+    <div class="head rv"><div><div class="kick">Destacados</div><div class="h2">Los más <em>vendidos</em></div></div><a class="link" href="#prods">Ver todos</a></div>
+    <div class="grid" id="g1"></div>
+    <div class="nota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Tus precios reales, sin «,00» ni centavos: precio, transferencia y cuotas salen de tu Tiendanube.</div>
+  </div></section>
+
+  <!-- 7 · Problema → solución -->
+  <section class="sec ps" id="ps"><div class="wrap ps-g">
+    <div class="rv">
+      <div class="h2">¿Un regalo que le quede <em>lindo de verdad</em>?</div>
+      <p class="sub">Elegís el set, nosotros lo preparamos con nuestro packaging y te llega listo para regalar (o regalarte).</p>
+      <a class="btn" href="#prods" style="margin-top:26px">Armar mi set</a>
+    </div>
+    <div class="vid rv" style="--i:2">
+      <div class="ig"><img src="m/logo-dark.png" alt="">lateckel.oficial</div>
+      <video class="av snd-v" src="m/ps.mp4" poster="m/ps.jpg" muted loop playsinline preload="none"></video>
+      <button class="snd" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/></svg><span>Activar sonido</span></button>
+    </div>
+  </div></section>
+
+  <!-- 8 · Testimonios -->
+  <section class="sec" id="tst">
+    <div class="wrap"><div class="head rv" style="justify-content:center;text-align:center"><div><div class="kick">Opiniones</div><div class="h2">Lo que dicen <em>los que pasean con La Teckel</em></div></div></div></div>
+    <div class="marq rv"><div class="mt" id="mt"></div></div>
+    <div class="wrap t-cta rv"><p>¿Tu perro ya tiene su La Teckel?</p><button class="btn l" id="abrir-t" type="button">Quiero dejar mi testimonio</button></div>
+  </section>
+
+  <!-- 9 · Categorías (todas, deslizables) -->
+  <section class="sec" id="cats" style="padding-top:10px"><div class="wrap">
+    <div class="head rv"><div><div class="kick">Categorías</div><div class="h2">Todo para <em>salir juntos</em></div></div><a class="link" href="#prods">Ver todo</a></div>
+    <div class="cats" id="cl"></div>
+  </div></section>
+
+  <!-- 10 · Ofertas -->
+  <section class="sec" id="ofertas" style="padding-top:10px"><div class="wrap">
+    <div class="head rv"><div><div class="kick">Promociones</div><div class="h2">Ofertas <em>de la semana</em></div></div><a class="link" href="#ofertas">Ver todas</a></div>
+    <div class="grid" id="g2"></div>
+  </div></section>
+
+  <!-- 11 · Preguntas frecuentes -->
+  <section class="sec" id="faq"><div class="wrap faq-g">
+    <div class="rv"><div class="kick">Ayuda</div><div class="h2">Preguntas <em>frecuentes</em></div><p class="sub">Si te queda alguna duda, escribinos por WhatsApp y te respondemos.</p></div>
+    <div class="rv" style="--i:1" id="fq"></div>
+  </div></section>
+
+  <!-- 12 · Llamado a la acción -->
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="cta-b rv">
+      <img class="mark" src="m/logo-light.png" alt="">
+      <div><div class="kick">Paws &amp; People</div><div class="h2">El set completo para el paseo de todos los días.</div><p class="sub">Comprá online con 10% OFF por transferencia o vení a conocer todo al showroom de Boedo.</p></div>
+      <div class="btns"><a class="btn w" href="#prods">Comprar ahora</a><a class="btn o" href="#top">Consultar por WhatsApp</a></div>
+    </div>
+  </div></section>
+
+  <!-- 13 · Showroom -->
+  <section class="sec" style="padding:0"><div class="wrap">
+    <div class="map rv">
+      <div class="map-i">
+        <div class="kick">Nuestro showroom</div>
+        <div class="h2">Vení a <em>probarlo</em></div>
+        <div class="mr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><b>Av. Boedo 966, CABA</b><span>Dentro de Joyería Bilevich</span></div></div>
+        <div class="mr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Lunes a viernes de 10 a 19 h</b><span>Sábados de 10 a 13 h</span></div></div>
+        <a class="btn" href="#top">Cómo llegar</a>
+      </div>
+      <div class="map-p"><iframe title="Mapa del showroom" src="https://maps.google.com/maps?q=Av.%20Boedo%20966%2C%20CABA&z=15&output=embed"></iframe></div>
+    </div>
+  </div></section>
+
+  <!-- 14 · Pie -->
+  <footer class="foot"><div class="wrap">
+    <div class="fg">
+      <div><img class="flogo" src="m/logo-light.png" alt="La Teckel"><p>Accesorios de diseño para perros y para vos. Showroom en Boedo y envíos a todo el país.</p></div>
+      <div><h4>Categorías</h4><ul><li>Arneses</li><li>Correas</li><li>Collares de diseño</li><li>Chapitas identificatorias</li><li>Sweaters y abrigos</li></ul></div>
+      <div><h4>Contacto</h4><ul><li>WhatsApp</li><li>Instagram @lateckel.oficial</li><li>Av. Boedo 966, CABA</li></ul></div>
+      <div><h4>Medios de pago</h4><div class="pay"><span>Transferencia</span><span>Visa</span><span>Mastercard</span><span>Amex</span><span>Mercado Pago</span></div></div>
+    </div>
+    <div class="fb"><span>© 2026 La Teckel</span><span>Diseño y desarrollo: PRAXIS</span></div>
+  </div></footer>
+  <a class="wa" href="#top" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.4z"/></svg></a>
+ </div>
+ </div>
+
+ <!-- ficha de producto -->
+ <div class="fx" id="fx">
+   <div class="fx-top"><img src="m/logo-dark.png" alt="La Teckel"><button type="button" id="fx-x"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg>Volver a la tienda</button></div>
+   <div class="fx-g" id="fxg"></div>
+ </div>
+
+ <!-- testimonio -->
+ <div class="md" id="md"><div class="md-b">
+   <button class="md-x" type="button" id="md-x" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+   <form id="tf">
+     <h4>Contanos tu experiencia</h4>
+     <p>Tu opinión ayuda a otros a elegir. Se publica una vez que La Teckel la revisa.</p>
+     <label class="fld"><span>Tu calificación</span><div class="si" id="si"></div></label>
+     <label class="fld"><span>Tu nombre</span><input id="tn" required maxlength="40" placeholder="Ej.: Sofía y Lola"></label>
+     <label class="fld"><span>¿Qué compraste?</span><input id="tp" maxlength="60" placeholder="Ej.: Arnés Body Vichy"></label>
+     <label class="fld"><span>Tu testimonio</span><textarea id="tx" required maxlength="280" placeholder="¿Qué te pareció tu compra?"></textarea></label>
+     <button class="btn" type="submit">Enviar testimonio</button>
+   </form>
+   <div class="gr" id="gr"><h4>¡Gracias!</h4><p>En la vista previa ya aparece en el carrusel. En la web le llega a La Teckel para aprobarlo.</p></div>
+ </div></div>
+</div>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+const $=s=>document.querySelector(s);
+const fmt=n=>'$'+Math.round(n).toLocaleString('es-AR');
+const star='<svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .7-5.3 4.8 1.5 7L12 17.5 5.8 21l1.5-7L2 9.3l7-.7z"/></svg>';
+// productos reales de La Teckel, precios de su Tiendanube sin centavos (10% OFF transferencia, 3 cuotas)
+const P=[['Arnés Waterproof Verde',95000,'p05'],['Arnés Body Vichy',85000,'p01'],['Arnés Todo Terreno Oxford',130000,'p00'],['Collar GRETA · Rosa',95000,'p04'],['Arnés Body Dots',85000,'p06'],['Arnés Todo Terreno Chanel Caramel',130000,'p07'],['Correa Oxford',74000,'p11'],['Porta Bolsas Vichy',41000,'p13'],['Chaleco',48750,'p14',65000],['Collar Besos by Agatha Ruiz de la Prada',49000,'p23'],['Collar a elección + Chapita QR',128000,'p19'],['Adorno Árbol de Navidad Perritos (pack 4)',40000,'p12']];
+const OPS=[24,18,15,11,9,13,8,7,6,10,5,12];
+const card=(p,i,promo)=>`<article class="card rv" style="--i:${i%4}" data-i="${P.indexOf(p)}"><div class="ph"><img src="m/${p[2]}.jpg" alt="${p[0]}" loading="lazy">${promo?`<span class="tag">${promo}</span>`:(i<2?'<span class="tag c">Más vendido</span>':'')}</div><div class="in"><h3>${p[0]}</h3><div class="op"><span class="st">${star.repeat(5)}</span>${OPS[P.indexOf(p)]} opiniones</div><div class="pr">${p[3]?`<s style="font:500 14px Inter;color:#9C8E82;margin-right:6px">${fmt(p[3])}</s>`:''}${fmt(p[1])}</div><div class="trf"><b>${fmt(p[1]*.9)}</b> con transferencia<em>-10%</em></div><div class="cuo">3 x ${fmt(p[1]/3)} sin interés</div></div></article>`;
+$('#g1').innerHTML=P.slice(0,8).map((p,i)=>card(p,i)).join('');
+$('#g2').innerHTML=[[P[8],'25% OFF'],[P[9],'Nuevo'],[P[10],'Combo'],[P[11],'Navidad']].map((x,i)=>card(x[0],i,x[1])).join('');
+// categorías: todas las de su Tiendanube, deslizables
+const CT=[['Arneses','Body, ajustable, todo terreno','c-arn'],['Correas','Combinan con todo el set','c-cor'],['Collares de diseño','Hechos a pedido y a medida','c-dis'],['Collares apto paseo','Regulables','c-pas'],['Porta bolsas','El set completo','c-pb'],['Chapitas identificatorias','Con QR','p15'],['Sweaters y abrigos','Para el frío','p14'],['Para vos y el hogar','Navidad y deco','c-vos']];
+$('#cl').innerHTML=CT.map((c,i)=>`<a class="cat rv" style="--i:${i%4}" href="#prods"><img src="m/${c[2]}.jpg" alt="${c[0]}" loading="lazy"><div><i></i><b>${c[0]}</b><span>${c[1]}</span></div></a>`).join('');
+// testimonios de ejemplo (se cargan con los reales y se suman los que dejen los clientes)
+const T=[['Sofía','Arnés Body Vichy','Por fin un arnés que Lola se deja poner. Entra por las patas y listo, cero pelea.'],['Martín','Arnés Waterproof Verde','Lo uso todos los días en la plaza y se limpia en dos minutos. Sigue como nuevo.'],['Carla','Collar GRETA','Hermoso, hecho a medida. Me ayudaron por WhatsApp con el talle.'],['Lucía','Arnés Todo Terreno','La manija es un golazo: Toto ya no tira en el paseo. Pagué con transferencia y me ahorré el 10%.'],['Julián','Set Oxford','Lo pasé a buscar por el showroom de Boedo y me asesoraron un montón.']];
+let TT=[...T];
+const tc=(t,n)=>`<div class="tc${n?' nuevo':''}"><div class="st">${star.repeat(t[3]||5)}</div><p>«${t[2]}»</p><div class="who"><i>${t[0][0]}</i><div>${t[0]}<small>Compró ${t[1]||'en La Teckel'}</small></div></div></div>`;
+const pintarT=n=>{const h=TT.map((t,i)=>tc(t,n&&i===0)).join('');$('#mt').innerHTML=h+h};pintarT();
+// beneficios (banda mostaza con círculos marrones)
+const k='stroke="#C4B84C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"';
+const BI={t:`<svg viewBox="0 0 44 44" fill="none" ${k}><rect x="4" y="12" width="36" height="21" rx="2"/><circle cx="22" cy="22.5" r="4.5"/><path d="M10 17.5v.01M34 27.5v.01"/></svg>`,c:`<svg viewBox="0 0 44 44" fill="none" ${k}><rect x="4" y="12" width="36" height="21" rx="2"/><path d="M4 19h36M10 27h7"/></svg>`,e:`<svg viewBox="0 0 44 44" fill="none" ${k}><rect x="3" y="13" width="23" height="16" rx="1"/><path d="M26 18h7l5 5.5V29H26z"/><circle cx="13" cy="32" r="3"/><circle cx="31" cy="32" r="3"/></svg>`,s:`<svg viewBox="0 0 44 44" fill="none" ${k}><path d="M6 18 9 8h26l3 10"/><path d="M6 18v18h32V18"/><path d="M6 18c0 3 2.5 5 5.3 5s5.3-2 5.3-5c0 3 2.4 5 5.4 5s5.4-2 5.4-5c0 3 2.4 5 5.3 5S38 21 38 18"/><path d="M18 36v-8h8v8"/></svg>`};
+const BB=[['t','10% OFF en transferencia','En todos los productos'],['c','3 cuotas sin interés','Con tarjeta de crédito'],['e','Envío gratis','En compras +$160.000'],['s','Showroom en Boedo','Av. Boedo 966, CABA']];
+const bbSet='<div style="display:flex">'+BB.map(x=>`<div class="bb-i"><span class="bb-ic">${BI[x[0]]}</span><span class="bb-tx"><b>${x[1]}</b><span>${x[2]}</span></span></div>`).join('')+'</div>';
+$('#bb').innerHTML=bbSet+bbSet+bbSet+bbSet;
+// FAQ
+const F=[['¿Cómo elijo el talle?','Tenés una guía de talles con las medidas de cuello y pecho. Si dudás, mandanos las medidas por WhatsApp y te decimos cuál le va.'],['¿Hacen envíos?','Sí, a todo el país. En compras de más de $160.000 el envío es gratis.'],['¿Cómo funciona el 10% OFF?','Elegís transferencia bancaria al finalizar la compra y el descuento se aplica solo.'],['¿Puedo pagar en cuotas?','Sí, en 3 cuotas sin interés con tarjeta de crédito.'],['¿Puedo verlo en persona?','Claro. Nuestro showroom está en Av. Boedo 966 (Joyería Bilevich), de lunes a viernes de 10 a 19 h y sábados de 10 a 13 h.'],['¿Puedo cambiarlo si no le queda?','Sí, según nuestra política de cambio. Escribinos y lo resolvemos.']];
+$('#fq').innerHTML=F.map((f,i)=>`<details class="fq"${i?'':' open'}><summary>${f[0]}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></summary><p>${f[1]}</p></details>`).join('');
+const sc=$('#screen');const medir=()=>{};
+// ficha de producto
+const ic={b:'<svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>',c:'<svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/></svg>'};
+const fx=$('#fx');
+function abrir(i){const p=P[i];const o=[p[2],...P.filter(q=>q!==p).slice(0,2).map(q=>q[2])];
+ $('#fxg').innerHTML=`<div class="fx-gal"><div class="fx-th">${o.map((s,k)=>`<img src="m/${s}.jpg" class="${k?'':'on'}" alt="">`).join('')}</div><div class="fx-main"><img id="fxm" src="m/${p[2]}.jpg" alt="${p[0]}"></div></div>
+ <div><div class="miga">Inicio › Productos › ${p[0]}</div><h1>${p[0]}</h1><div class="vend"><span class="st">${star.repeat(5)}</span>${OPS[i]} opiniones · +30 vendidos</div>
+ <div class="fx-pr"><b>${fmt(p[1])}</b><em>10% OFF transfiriendo</em></div><div class="fx-imp">Precio sin impuestos ${fmt(p[1]/1.21)}</div>
+ <div class="box t2"><span class="ic">${ic.b}</span><div><small>Transferencia · <i>10% OFF</i></small><b>${fmt(p[1]*.9)}</b></div></div>
+ <div class="box c2"><span class="ic">${ic.c}</span><div><small>3 cuotas sin interés de</small><b>${fmt(p[1]/3)}</b></div><div class="tarj"><span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>CABAL</span><span>NARANJA</span><span>MERCADO PAGO</span></div></div>
+ <p class="ahorro"><i>Ahorrás ${fmt(p[1]*.1)}</i> pagando con transferencia</p>
+ <div class="envio"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><div><b>Envío gratis en compras +$160.000</b><span>O retiralo por el showroom de Boedo</span></div></div>
+ <div class="stock">¡Quedan pocas unidades!</div>
+ <div class="buy"><div class="qty"><span>−</span>1<span>+</span></div><button class="btn" type="button">Agregar al carrito</button></div></div>`;
+ fx.classList.add('on');fx.scrollTop=0;
+ fx.querySelectorAll('.fx-th img').forEach(im=>im.addEventListener('click',()=>{fx.querySelectorAll('.fx-th img').forEach(z=>z.classList.toggle('on',z===im));$('#fxm').src=im.src}));}
+document.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)abrir(+c.dataset.i)});
+$('#fx-x').addEventListener('click',()=>fx.classList.remove('on'));
+// testimonio
+let est=5;const si=$('#si');const pS=()=>{si.innerHTML=[1,2,3,4,5].map(k=>`<button type="button" data-k="${k}" class="${k>est?'off':''}" aria-label="${k} estrellas">${star}</button>`).join('')};pS();
+si.addEventListener('click',e=>{const b=e.target.closest('button');if(b){est=+b.dataset.k;pS()}});
+$('#abrir-t').addEventListener('click',()=>{$('#tf').style.display='';$('#gr').style.display='none';$('#md').classList.add('on')});
+$('#md-x').addEventListener('click',()=>$('#md').classList.remove('on'));
+$('#md').addEventListener('click',e=>{if(e.target.id==='md')$('#md').classList.remove('on')});
+$('#tf').addEventListener('submit',e=>{e.preventDefault();TT=[[$('#tn').value.trim(),$('#tp').value.trim(),$('#tx').value.trim(),est],...TT];pintarT(true);$('#tf').reset();est=5;pS();$('#tf').style.display='none';$('#gr').style.display='block'});
+// aparición + videos solo a la vista
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{root:sc,threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.rv').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in')}),1500);
+// siempre en silencio salvo «Activar sonido»; al salir de pantalla o de la pestaña vuelve a silencio
+const silenciar=v=>{v.muted=true;const s=v.parentElement.querySelector('.snd span');if(s)s.textContent='Activar sonido'};
+const vo=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){if(v.preload==='none')v.preload='auto';v.play().catch(()=>{})}else{v.pause();silenciar(v)}}),{root:sc,threshold:.2});
+document.querySelectorAll('video').forEach(v=>{v.muted=true;vo.observe(v)});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video').forEach(v=>{v.pause();silenciar(v)})});
+addEventListener('pagehide',()=>document.querySelectorAll('video').forEach(v=>{v.pause();silenciar(v)}));
+document.querySelectorAll('.snd').forEach(b=>b.addEventListener('click',()=>{const v=b.parentElement.querySelector('video');document.querySelectorAll('.snd-v').forEach(o=>{if(o!==v)silenciar(o)});v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.play()}b.querySelector('span').textContent=v.muted?'Activar sonido':'Silenciar'}));
+// PC / celular
+const dev=$('#device');
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.seg button').forEach(z=>z.classList.toggle('on',z===b));dev.classList.toggle('mob',b.dataset.m==='mob');sc.scrollTop=0;fx.classList.remove('on');setTimeout(medir,600)}));
+if(location.hash==='#celular')document.querySelector('[data-m=mob]').click();
+document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea'))return;if(e.key==='m'||e.key==='M')document.querySelector('.seg button:not(.on)').click();if(e.key==='Escape'){fx.classList.remove('on');$('#md').classList.remove('on')}});
+</script>
+</body>
+</html>
